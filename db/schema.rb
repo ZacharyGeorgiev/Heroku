@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128081255) do
+ActiveRecord::Schema.define(version: 20170127201800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "visit", force: :cascade do |t|
-    t.string   "user_id"
-    t.integer  "number_of_views"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "users", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "visits",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
