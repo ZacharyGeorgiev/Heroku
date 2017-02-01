@@ -24,6 +24,6 @@ class VisitsController < ApplicationController
 		end
 		@user.add_visit
 		@user.save
-		show(@user)
+		render :json => {"count" => @user.visits}, content_type: "application/json"
 	end
 end
