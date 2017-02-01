@@ -1,23 +1,22 @@
 class VisitsController < ApplicationController
+  before_action :find_visit
+
   def index
-    @vis = Visit.all
+    render_visit
   end
 
-  def show
-    @vis = Visit.find(params[:user])
+  def increment
+    @visit.increment_count.save
+    render_visit
   end
-  def create
-    if Visit.exists?(params[:user])
-      @vis = Visit.find(params[:user])
-      @vis.visited += 1
-    else
-      @vis = Visit.new
-      @vis.id = params[:user]
-      @vis.user = params[:user]
-      @vis.visited = 1
-    end
-    @vis.save
+
+  private
+
+  def find_visit
+    @visit = Visit.find_or_create_by(:user => params[:user])
   end
-  #protect_from_forgery with: :exception
-  skip_before_filter  :verify_authenticity_token
+
+  def render_visit
+    render json: @visit.to_public_hash
+  end
 end
