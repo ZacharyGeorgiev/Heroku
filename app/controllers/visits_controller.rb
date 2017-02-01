@@ -24,5 +24,6 @@ class VisitsController < ApplicationController
 		end
 		@user.add_visit
 		@user.save
+		show(@user)
 	end
 end
